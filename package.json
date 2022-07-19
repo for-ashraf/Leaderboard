@@ -1,0 +1,21 @@
+{
+  "name": "leaderboard",
+  "version": "1.0.0",
+  "description": "This is a Repository where I will manage leaderboard having name and score of a person.",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/for-ashraf/Leaderboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/for-ashraf/Leaderboard/issues"
+  },
+  "homepage": "https://github.com/for-ashraf/Leaderboard#readme"
+}
