@@ -3,7 +3,7 @@ export const populateScores = (scoresArray) => {
   scoresTable.innerHTML = '<th><tr style="color:Orange;"><td>Player</td><td>Score</td></tr></th>';
   for (let i = 0; i < scoresArray.length; i += 1) {
     const tr = document.createElement('tr');
-    tr.classList.add("rowStyle");
+    tr.classList.add('rowStyle");
     const td1 = document.createElement('td');
     const td2 = document.createElement('td');
     td1.append(`${scoresArray[i].user}`);

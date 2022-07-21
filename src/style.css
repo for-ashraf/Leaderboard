@@ -24,8 +24,9 @@ body {
 }
 
 .rowStyle {
-  color:#fff;
+  color: white;
 }
+
 .main-page {
   display: flex;
   justify-content: space-between;
