@@ -13,7 +13,6 @@ export const createGame = async () => {
   }).then((response) => response.json())
     .then((name) => {
       gameID = name.result.split(' ')[name.result.split(' ').indexOf('ID:') + 1];
-      alert(gameID);
       localStorage.setItem('gameID', JSON.stringify(gameID));
     });
 };
