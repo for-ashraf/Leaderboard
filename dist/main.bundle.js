@@ -109,13 +109,33 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/DynamicHTML.js":
+/*!****************************!*\
+  !*** ./src/DynamicHTML.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"newGame\": () => (/* binding */ newGame),\n/* harmony export */   \"populateScores\": () => (/* binding */ populateScores)\n/* harmony export */ });\nconst populateScores = (scoresArray) => {\n  const scoresTable = document.getElementById('scores_table');\n  scoresTable.innerHTML = '';\n  for (let i = 0; i < scoresArray.length; i += 1) {\n    const tr = document.createElement('tr');\n    const td = document.createElement('td');\n    td.append(`${scoresArray[i].user}:${scoresArray[i].score}`);\n    tr.appendChild(td);\n    scoresTable.appendChild(td);\n  }\n};\n\nconst newGame = () => {\n};\n\n//# sourceURL=webpack://leaderboard/./src/DynamicHTML.js?");
+
+/***/ }),
+
+/***/ "./src/consumeAPI.js":
+/*!***************************!*\
+  !*** ./src/consumeAPI.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"createGame\": () => (/* binding */ createGame),\n/* harmony export */   \"postScore\": () => (/* binding */ postScore),\n/* harmony export */   \"refreshScores\": () => (/* binding */ refreshScores)\n/* harmony export */ });\n/* harmony import */ var _DynamicHTML_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DynamicHTML.js */ \"./src/DynamicHTML.js\");\n\n\nasync function createGame() {\n  let gameID;\n  await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/', {\n    method: 'POST',\n    body: JSON.stringify({\n      name: 'Muhammad Ashraf',\n    }),\n    headers: {\n      'Content-type': 'application/json; charset=UTF-8',\n    },\n  }).then((response) => response.json())\n    .then((name) => {\n      gameID = name.result.split(' ')[name.result.split(' ').indexOf('ID:') + 1];\n      localStorage.setItem('gameID', JSON.stringify(gameID));\n    });\n}\n\nasync function refreshScores() {\n  const gameID = document.getElementById('gameID').value;\n  const gameUrl = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameID}/scores/`;\n  fetch(gameUrl)\n    .then((response) => response.json())\n    .then((json) => {\n      (0,_DynamicHTML_js__WEBPACK_IMPORTED_MODULE_0__.populateScores)(json.result);\n    });\n}\n\nasync function postScore(e) {\n  e.preventDefault();\n  const gameID = e.target.gameID.value;\n  const gameUrl = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameID}/scores/`;\n  const data = {\n    user: e.target.name.value,\n    score: Number(e.target.score.value),\n  };\n  await fetch(gameUrl, {\n    method: 'POST',\n\n    body: JSON.stringify(data),\n    headers: {\n      'Content-type': 'application/json',\n    },\n  }).then((response) => response.json());\n  refreshScores();\n}\n\n\n//# sourceURL=webpack://leaderboard/./src/consumeAPI.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\r\n\r\n// api url\r\nconst api_url =\r\n\t\"https://employeedetails.free.beeceptor.com/my/api/path\";\r\n\r\n// Defining async function\r\nasync function getapi(url) {\r\n\t\r\n\t// Storing response\r\n\tconst response = await fetch(url);\r\n\t\r\n\t// Storing data in form of JSON\r\n\tvar data = await response.json();\r\n\tconsole.log(data);\r\n\tif (response) {\r\n\t\thideloader();\r\n\t}\r\n\tshow(data);\r\n}\r\n// Calling that async function\r\ngetapi(api_url);\r\n\r\n// Function to hide the loader\r\nfunction hideloader() {\r\n\tdocument.getElementById('loading').style.display = 'none';\r\n}\r\n// Function to define innerHTML for HTML table\r\nfunction show(data) {\r\n\tlet tab =\r\n\t\t`<tr>\r\n\t\t<th>Name</th>\r\n\t\t<th>Office</th>\r\n\t\t<th>Position</th>\r\n\t\t<th>Salary</th>\r\n\t\t</tr>`;\r\n\t\r\n\t// Loop to access all rows\r\n\tfor (let r of data.list) {\r\n\t\ttab += `<tr>\r\n\t<td>${r.name} </td>\r\n\t<td>${r.office}</td>\r\n\t<td>${r.position}</td>\r\n\t<td>${r.salary}</td>\t\t\r\n</tr>`;\r\n\t}\r\n\t// Setting innerHTML as tab variable\r\n\tdocument.getElementById(\"employees\").innerHTML = tab;\r\n}\r\n\r\n\n\n//# sourceURL=webpack://leaderboard/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _consumeAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./consumeAPI.js */ \"./src/consumeAPI.js\");\n\r\n\r\n\r\nconst form = document.getElementById('enterScore');\r\nform.onsubmit = _consumeAPI_js__WEBPACK_IMPORTED_MODULE_1__.postScore;\r\ndocument.getElementById('refresh_scores').onclick = _consumeAPI_js__WEBPACK_IMPORTED_MODULE_1__.refreshScores;\r\nwindow.addEventListener('load', () => {\r\n  const form = document.getElementById('enterScore');\r\n  if (!localStorage.getItem('gameID')) (0,_consumeAPI_js__WEBPACK_IMPORTED_MODULE_1__.createGame)();\r\n  const gameID = JSON.parse(localStorage.getItem('gameID'));\r\n  form.gameID.value = gameID;\r\n  (0,_consumeAPI_js__WEBPACK_IMPORTED_MODULE_1__.refreshScores)();\r\n});\r\n\n\n//# sourceURL=webpack://leaderboard/./src/index.js?");
 
 /***/ })
 
