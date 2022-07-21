@@ -1,13 +1,16 @@
 import './style.css';
-import { createGame, postScore, refreshScores } from './consumeAPI.js';
 
-const form = document.getElementById('enterScore');
-form.onsubmit = postScore;
-document.getElementById('refresh_scores').onclick = refreshScores;
-window.addEventListener('load', () => {
-  const form = document.getElementById('enterScore');
-  if (!localStorage.getItem('gameID')) createGame();
-  const gameID = JSON.parse(localStorage.getItem('gameID'));
-  form.gameID.value = gameID;
+import { addScore, refreshScores } from './score.js';
+
+const form = document.querySelector('.text-input-score');
+const refresh = document.querySelector('.refresh-btn');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addScore(e);
+  form.reset();
+});
+
+refresh.addEventListener('click', () => {
   refreshScores();
 });
