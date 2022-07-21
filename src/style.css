@@ -23,6 +23,9 @@ body {
   color: rgb(255, 17, 121);
 }
 
+.rowStyle {
+  color:#fff;
+}
 .main-page {
   display: flex;
   justify-content: space-between;
@@ -48,14 +51,14 @@ body {
   overflow-y: scroll;
 }
 
-.recent-score-body div:nth-child(odd) {
+.recent-score-body table:nth-child(odd) {
   background: rgb(255, 17, 121);
   color: #fff;
   padding: 10px 5px;
 }
 
-.recent-score-body div:nth-child(even) {
-  background: rgb(0, 32, 93);
+.recent-score-body table:nth-child(even) {
+  background: rgb(221, 225, 235);
   color: #fff;
   padding: 10px 5px;
 }
