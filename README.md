@@ -1,4 +1,4 @@
-# To-Do List
+# Leaderboard
 
 >In this project I have setup an application that will consume API to create a game and save and fetch players's scores and built with Webpack. 
 
@@ -37,6 +37,8 @@ To get a local copy up and running follow these simple example steps:
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
+
+Feel free to check the <a href="https://github.com/for-ashraf/Leaderboard/issues">issues page</a>.
 
 ## Show your support
 
